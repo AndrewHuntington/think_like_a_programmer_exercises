@@ -15,5 +15,15 @@ using std::cout;
 using std::cin;
 
 int main() {
-  // Code goes here
+  // Top half
+  for(int row = 1; row <= 4; row++) {
+    for(int col = 1; col <= 14; col++){
+      if ((col >= row && col < row * 2) || (col <= 14 - row + 1 && col >= 14 - row * 2 + 2)){
+        cout << "#";
+      } else {
+        cout << "-";
+      }
+    }
+    cout << "\n";
+  }
 }
