@@ -1,5 +1,5 @@
 // Exercise 2-3
-// Creates the following shape (14 horizontal, 8 vertical):
+// Creates the following shape (14 cols, 8 rows):
 // #            #
 //  ##        ## 
 //   ###    ###  
