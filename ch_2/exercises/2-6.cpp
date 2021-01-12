@@ -5,28 +5,62 @@
 using std::cin;
 using std::cout;
 
-int main()
+int findArrayLength(int digit)
 {
-  // TODO: Start with converting a single digit decimal number to binary
-  char digitChar;
-  cout << "Please enter a number (0-9): ";
-  cin >> digitChar;
-  int digit = digitChar - '0';
+  int arrayLength = 0;
+  while (digit >= 1) {
+    digit = digit / 2;
+    arrayLength++;
+  }
+  return arrayLength;
+}
 
-  cout << "The number " << digitChar << " in binary is: ";
+int convertDecimalToBinary(int digit)
+{
+  // Guard against 0
+  if (digit == 0)
+  {
+    cout << "0\n";
+    return 0;
+  }
 
-  // Produces the number in binary, but reversed
-  // TODO: Figure out how to correct
+  int count = -1;
+  int binaryNumber[findArrayLength(digit)];
+
   while (digit >= 1)
   {
+    count++;
     if (digit % 2 == 0)
     {
-      cout << "0";
+      binaryNumber[count] = 0;
     } else
     {
-      cout << "1";
+      binaryNumber[count] = 1;
     }
     digit = digit / 2;
   }
+
+  while (count >= 0) {
+    cout << binaryNumber[count];
+    count--;
+  }
+
+  return 0;
+}
+
+int main()
+{
+  // TODO: enum with two choices: decimal or binary
+
+  // TODO: Allow user to choose to convert from dec to bin or vice versa
+  cout << "Please enter a decimal number: ";
+  int digit;
+  cin >> digit;
+
+  cout << "The number " << digit << " in binary is: ";
+
+  // TODO: Use switch statement with enum to select dectobin or bintodec
+  convertDecimalToBinary(digit);
+
   cout << "\n";
 }
