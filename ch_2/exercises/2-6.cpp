@@ -65,11 +65,12 @@ int convertBinaryToDecimal()
   int sum = 0;
 
   cout << "Enter a binary number to convert to decimal: ";
-  do 
-  {
-    binaryDigitChar = cin.get(); // why won't this accept input?
-    currentBinaryNumber = binaryDigitChar - '0';
 
+  cin >> binaryDigitChar;
+  currentBinaryNumber = binaryDigitChar - '0';
+
+  while (true) 
+  {
     // Provides minimum error handling by ending on non-binary 
     // input or "enter"/"return"
     if (currentBinaryNumber != 0 && currentBinaryNumber != 1) 
@@ -78,8 +79,10 @@ int convertBinaryToDecimal()
     } else 
     {
       sum = sum * 2 + currentBinaryNumber;
+      binaryDigitChar = cin.get();
+      currentBinaryNumber = binaryDigitChar - '0';
     }
-  } while (true);
+  }
   cout << "\n";
 
   cout << "The decimal number is: " << sum << "\n";
@@ -106,5 +109,6 @@ int main()
   } else 
   {
     cout << "Invalid selection. Please try again.\n";
+    main();
   }
 }
