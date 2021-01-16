@@ -68,6 +68,7 @@ int convertBinaryToDecimal()
   do 
   {
     binaryDigitChar = cin.get(); // why won't this accept input?
+    currentBinaryNumber = binaryDigitChar - '0';
 
     // Provides minimum error handling by ending on non-binary 
     // input or "enter"/"return"
