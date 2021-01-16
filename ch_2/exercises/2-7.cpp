@@ -1,5 +1,5 @@
 // Exercise 2-7
-// Convert between binary, decimal, and hexidecimal numbers
+// Convert between binary, decimal, and hexadecimal numbers
 
 // TODO: Create menu
 // TODO: handle decimal <-> hexadecimal (0-9 A-F) conversions
@@ -18,6 +18,38 @@ int findArrayLength(int number)
     arrayLength++;
   }
   return arrayLength;
+}
+
+int convertHexToDecimal() {
+  char hexDigitChar;
+  int decDigit;
+  int sum = 0;
+
+  cout << "Enter a number in hexadecimal format to convert to decimal: ";
+  hexDigitChar = cin.get();
+
+  cout << "The hexadecimal number ";
+  
+  while (hexDigitChar != 10) {
+    cout << hexDigitChar;
+
+    if (hexDigitChar - '0' >= 0 && hexDigitChar - '0' < 10) {
+      decDigit = hexDigitChar - '0';
+    } else if (hexDigitChar > 64 && hexDigitChar < 71) {
+      decDigit = hexDigitChar - 55;
+    } else {
+      cout << "\nInvalid hexadecimal number. Please try again.\n";
+      break;
+    }
+
+    sum = sum * 16 + decDigit;
+
+    hexDigitChar = cin.get();
+  }
+
+  cout << " converted to decimal: " << sum << "\n";
+
+  return 0;
 }
 
 int convertDecimalToHex() {
@@ -73,5 +105,6 @@ int convertDecimalToHex() {
 }
 
 int main() {
-  convertDecimalToHex();
+  convertHexToDecimal();
+  // convertDecimalToHex();
 }
