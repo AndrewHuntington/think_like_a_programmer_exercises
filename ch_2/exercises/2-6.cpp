@@ -15,8 +15,14 @@ int findArrayLength(int digit)
   return arrayLength;
 }
 
-int convertDecimalToBinary(int digit)
+int convertDecimalToBinary()
 {
+  cout << "Please enter a decimal number to convert to binary: ";
+  int digit;
+  cin >> digit;
+
+  int originalDigit = digit;
+
   // Guard against 0
   if (digit == 0)
   {
@@ -40,27 +46,65 @@ int convertDecimalToBinary(int digit)
     digit = digit / 2;
   }
 
+  cout << "The number " << originalDigit << " in binary is: ";
+
   while (count >= 0) {
     cout << binaryNumber[count];
     count--;
-  }
+  } 
+
+  cout << "\n";
+
+  return 0;
+}
+
+int convertBinaryToDecimal()
+{
+  char binaryDigitChar;
+  int currentBinaryNumber;
+  int sum = 0;
+
+  cout << "Enter a binary number to convert to decimal: ";
+  do 
+  {
+    binaryDigitChar = cin.get();
+    currentBinaryNumber = binaryDigitChar - '0';
+
+    // Provides minimum error handling by ending on non-binary 
+    // input or "enter"/"return"
+    if (currentBinaryNumber != 0 && currentBinaryNumber != 1) 
+    {
+      break;
+    } else 
+    {
+      sum = sum * 2 + currentBinaryNumber;
+    }
+  } while (true);
+  cout << "\n";
+
+  cout << "The decimal number is: " << sum << "\n";
 
   return 0;
 }
 
 int main()
 {
-  // TODO: enum with two choices: decimal or binary
+  char choice;
 
-  // TODO: Allow user to choose to convert from dec to bin or vice versa
-  cout << "Please enter a decimal number: ";
-  int digit;
-  cin >> digit;
+  cout << "\nPlease enter 'b' to convert from binary to decimal.\n";
+  cout << "Please enter 'd' to covert from decimal to binary.\n";
+  cout << "\nYour selection:> ";
+ 
+  cin >> choice;
 
-  cout << "The number " << digit << " in binary is: ";
-
-  // TODO: Use switch statement with enum to select dectobin or bintodec
-  convertDecimalToBinary(digit);
-
-  cout << "\n";
+  if (choice == 'b' || choice == 'B')
+  {
+    convertBinaryToDecimal();
+  } else if (choice == 'd' || choice == 'D') 
+  {
+    convertDecimalToBinary();
+  } else 
+  {
+    cout << "Invalid selection. Please try again.\n";
+  }
 }
