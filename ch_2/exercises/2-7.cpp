@@ -10,6 +10,50 @@
 using std::cin;
 using std::cout;
 
-int main() {
+int convertDecimalToHex() {
+  int numInDecimal = 0;
+  int remainder;
+  char hexDigitChar;
 
+  cout << "Enter a number in decimal format to convert to hexadecimal: ";
+  cin >> numInDecimal;
+  int originalNumber = numInDecimal;
+
+  cout << "\nThe decimal number " << numInDecimal 
+       << " coverted to hexadecimal: ";
+
+  while (numInDecimal > 0) {
+    remainder = numInDecimal % 16;
+
+    switch (remainder) {
+      case 0: hexDigitChar = '0'; break;
+      case 1: hexDigitChar = '1'; break;
+      case 2: hexDigitChar = '2'; break;
+      case 3: hexDigitChar = '3'; break;
+      case 4: hexDigitChar = '4'; break;
+      case 5: hexDigitChar = '5'; break;
+      case 6: hexDigitChar = '6'; break;
+      case 7: hexDigitChar = '7'; break;
+      case 8: hexDigitChar = '8'; break;
+      case 9: hexDigitChar = '9'; break;
+      case 10: hexDigitChar = 'A'; break;
+      case 11: hexDigitChar = 'B'; break;
+      case 12: hexDigitChar = 'C'; break;
+      case 13: hexDigitChar = 'D'; break;
+      case 14: hexDigitChar = 'E'; break;
+      case 15: hexDigitChar = 'F'; break;
+    }
+    
+    cout << hexDigitChar;
+
+    numInDecimal = numInDecimal / 16;
+  }
+
+  cout << "\n";
+  
+  return 0;
+}
+
+int main() {
+  convertDecimalToHex();
 }
