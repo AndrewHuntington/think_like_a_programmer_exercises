@@ -10,6 +10,16 @@
 using std::cin;
 using std::cout;
 
+int findArrayLength(int number)
+{
+  int arrayLength = 0;
+  while (number >= 1) {
+    number = number / 16;
+    arrayLength++;
+  }
+  return arrayLength;
+}
+
 int convertDecimalToHex() {
   int numInDecimal = 0;
   int remainder;
@@ -17,12 +27,15 @@ int convertDecimalToHex() {
 
   cout << "Enter a number in decimal format to convert to hexadecimal: ";
   cin >> numInDecimal;
-  int originalNumber = numInDecimal;
+
+  char hexDigits[findArrayLength(numInDecimal)];
+  int count = -1;
 
   cout << "\nThe decimal number " << numInDecimal 
        << " coverted to hexadecimal: ";
 
   while (numInDecimal > 0) {
+    count++;
     remainder = numInDecimal % 16;
 
     switch (remainder) {
@@ -44,9 +57,14 @@ int convertDecimalToHex() {
       case 15: hexDigitChar = 'F'; break;
     }
     
-    cout << hexDigitChar;
+    hexDigits[count] = hexDigitChar;
 
     numInDecimal = numInDecimal / 16;
+  }
+
+  while (count >= 0) {
+    cout << hexDigits[count];
+    count--;
   }
 
   cout << "\n";
