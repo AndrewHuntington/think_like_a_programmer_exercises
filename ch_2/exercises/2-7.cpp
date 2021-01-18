@@ -1,9 +1,6 @@
 // Exercise 2-7
 // Convert between binary, decimal, and hexadecimal numbers
 
-// TODO: Create menu
-// TODO: Move code from 2-6 to handle binary <-> decimal
-
 #include <iostream>
 using std::cin;
 using std::cout;
@@ -83,6 +80,7 @@ int processHexToDecimal(char hexDigitChar) {
 }
 
 void convertHexToDecimal() {
+  char catchJunk = cin.get(); // grabs extra newline char
   char hexDigitChar;
 
   cout << "Enter a number in hexadecimal format to convert to decimal: ";
@@ -200,11 +198,10 @@ void convertBinaryToHex() {
 }
 
 void convertHexToBinary() {
+  char catchJunk = cin.get(); // grabs extra newline char
   char hexDigitChar;
   int numInDec = 0;
 
-  // convert hex to dec
-  // convert dec to bin
   cout << "Enter a number in hexadecimal format to convert to binary: ";
   hexDigitChar = cin.get();
   numInDec = processHexToDecimal(hexDigitChar);
@@ -212,10 +209,31 @@ void convertHexToBinary() {
 }
 
 int main() {
+  int response;
+
+  cout << "Please enter a number to choose an option: \n";
+  cout << "\t1. Convert Binary -> Decimal\n";
+  cout << "\t2. Convert Binary -> Hexadecimal\n";
+  cout << "\t3. Convert Hexadecimal -> Binary\n";
+  cout << "\t4. Convert Hexadecimal -> Decimal\n";
+  cout << "\t5. Convert Decimal -> Hexadecimal\n";
+  cout << "\t6. Convert Decimal -> Binary\n";
+  cout << "Please enter your selection (1-6)> ";
+  cin >> response;
+
+  switch (response) {
+    case 1: convertBinaryToDecimal(); break;
+    case 2: convertBinaryToHex(); break;
+    case 3: convertHexToBinary(); break;
+    case 4: convertHexToDecimal(); break;
+    case 5: convertDecimalToHex(); break;
+    case 6: convertDecimalToBinary(); break;
+  }
+
   // convertBinaryToDecimal();
   // convertBinaryToHex();
   // convertHexToBinary();
   // convertHexToDecimal();
   // convertDecimalToHex();
-  convertDecimalToBinary();
+  // convertDecimalToBinary();
 }
