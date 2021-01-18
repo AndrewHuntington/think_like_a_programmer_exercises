@@ -2,8 +2,6 @@
 // Convert between binary, decimal, and hexadecimal numbers
 
 // TODO: Create menu
-// TODO: handle decimal <-> hexadecimal (0-9 A-F) conversions
-// TODO: handle binary <-> hex conversions
 // TODO: Move code from 2-6 to handle binary <-> decimal
 
 #include <iostream>
@@ -20,19 +18,53 @@ int findArrayLength(int number)
   return arrayLength;
 }
 
-int convertHexToDecimal() {
-  char hexDigitChar;
+void processDecimalToBinary(int number) {
+  // Guard against 0
+  if (number == 0)
+  {
+    cout << "0\n";
+  }
+
+  int count = -1;
+  int binaryNumber[findArrayLength(number)];
+
+  while (number >= 1)
+  {
+    count++;
+    if (number % 2 == 0)
+    {
+      binaryNumber[count] = 0;
+    } else
+    {
+      binaryNumber[count] = 1;
+    }
+    number = number / 2;
+  }
+
+  cout << "Your number converted to binary is: ";
+
+  while (count >= 0) {
+    cout << binaryNumber[count];
+    count--;
+  }
+
+  cout << "\n";
+}
+
+void convertDecimalToBinary()
+{
+  cout << "Please enter a decimal number to convert to binary: ";
+  int number;
+  cin >> number;
+
+  processDecimalToBinary(number);
+}
+
+int processHexToDecimal(char hexDigitChar) {
   int decDigit;
   int sum = 0;
 
-  cout << "Enter a number in hexadecimal format to convert to decimal: ";
-  hexDigitChar = cin.get();
-
-  cout << "The hexadecimal number ";
-  
   while (hexDigitChar != 10) {
-    cout << hexDigitChar;
-
     if (hexDigitChar - '0' >= 0 && hexDigitChar - '0' < 10) {
       decDigit = hexDigitChar - '0';
     } else if (hexDigitChar > 64 && hexDigitChar < 71) {
@@ -47,24 +79,24 @@ int convertHexToDecimal() {
     hexDigitChar = cin.get();
   }
 
-  cout << " converted to decimal: " << sum << "\n";
-
-  return 0;
+  return sum;
 }
 
-int convertDecimalToHex() {
-  int numInDecimal = 0;
-  int remainder;
+void convertHexToDecimal() {
   char hexDigitChar;
 
-  cout << "Enter a number in decimal format to convert to hexadecimal: ";
-  cin >> numInDecimal;
+  cout << "Enter a number in hexadecimal format to convert to decimal: ";
+  hexDigitChar = cin.get();
 
+  cout << "Your number converted to decimal: " 
+       << processHexToDecimal(hexDigitChar)  << "\n";
+}
+
+void processDecimalToHex(int numInDecimal) {
+  int remainder;
+  char hexDigitChar;
   char hexDigits[findArrayLength(numInDecimal)];
   int count = -1;
-
-  cout << "\nThe decimal number " << numInDecimal 
-       << " coverted to hexadecimal: ";
 
   while (numInDecimal > 0) {
     count++;
@@ -98,13 +130,92 @@ int convertDecimalToHex() {
     cout << hexDigits[count];
     count--;
   }
+}
+
+void convertDecimalToHex() {
+  int numInDecimal = 0;
+
+  cout << "Enter a number in decimal format to convert to hexadecimal: ";
+  cin >> numInDecimal;
+
+  cout << "\nThe decimal number " << numInDecimal 
+       << " coverted to hexadecimal: ";
+
+  processDecimalToHex(numInDecimal);
 
   cout << "\n";
+}
+
+int processBinaryToDecimal(int currentBinaryNumber) {
+  int sum = 0;
+  char binaryDigitChar;
+
+  while (true) {
+    // Provides minimum error handling by ending on non-binary 
+    // input or "enter"/"return"
+    if (currentBinaryNumber != 0 && currentBinaryNumber != 1) 
+    {
+      break;
+    } else {
+      sum = sum * 2 + currentBinaryNumber;
+      binaryDigitChar = cin.get();
+      currentBinaryNumber = binaryDigitChar - '0';
+    }
+  }
+
+  return sum;
+}
+
+void convertBinaryToDecimal() {
+  char binaryDigitChar;
+  int currentBinaryNumber;
+
+  cout << "Enter a number in binary format to convert to decimal: ";
+  cin >> binaryDigitChar;
+  currentBinaryNumber = binaryDigitChar - '0';
+
   
-  return 0;
+
+  cout << "Your number converted to decimal: " 
+       << processBinaryToDecimal(currentBinaryNumber) << "\n";
+
+  cout << "\n";
+}
+
+void convertBinaryToHex() {
+  char binaryDigitChar;
+  int currentBinaryNumber;
+  
+  cout << "Enter a number in binary format to convert to hexadecimal: ";
+  cin >> binaryDigitChar;
+  currentBinaryNumber = binaryDigitChar - '0';
+
+  int numInDecimal = processBinaryToDecimal(currentBinaryNumber);
+
+  cout << "\nYour number coverted to hexadecimal: ";
+
+  processDecimalToHex(numInDecimal);
+
+  cout << "\n";
+}
+
+void convertHexToBinary() {
+  char hexDigitChar;
+  int numInDec = 0;
+
+  // convert hex to dec
+  // convert dec to bin
+  cout << "Enter a number in hexadecimal format to convert to binary: ";
+  hexDigitChar = cin.get();
+  numInDec = processHexToDecimal(hexDigitChar);
+  processDecimalToBinary(numInDec);
 }
 
 int main() {
-  convertHexToDecimal();
+  // convertBinaryToDecimal();
+  // convertBinaryToHex();
+  // convertHexToBinary();
+  // convertHexToDecimal();
   // convertDecimalToHex();
+  convertDecimalToBinary();
 }
