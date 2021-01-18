@@ -58,16 +58,9 @@ int convertDecimalToBinary()
   return 0;
 }
 
-int convertBinaryToDecimal()
-{
-  char binaryDigitChar;
-  int currentBinaryNumber;
+int processBinaryToDecimal(int currentBinaryNumber) {
   int sum = 0;
-
-  cout << "Enter a binary number to convert to decimal: ";
-
-  cin >> binaryDigitChar;
-  currentBinaryNumber = binaryDigitChar - '0';
+  char binaryDigitChar;
 
   while (true) 
   {
@@ -83,11 +76,25 @@ int convertBinaryToDecimal()
       currentBinaryNumber = binaryDigitChar - '0';
     }
   }
+
+  return sum;
+}
+
+void convertBinaryToDecimal()
+{
+  char binaryDigitChar;
+  int currentBinaryNumber;
+
+  cout << "Enter a binary number to convert to decimal: ";
+
+  cin >> binaryDigitChar;
+  currentBinaryNumber = binaryDigitChar - '0';
+
+  int sum = processBinaryToDecimal(currentBinaryNumber);
+
   cout << "\n";
 
   cout << "The decimal number is: " << sum << "\n";
-
-  return 0;
 }
 
 int main()
